@@ -15,13 +15,17 @@ namespace _Demo
             string data = "Hello GOST!!!";
             string password = "pass";
 
-            LibCriptoGOST.API ApiGOST = new();
-
-            var enc = ApiGOST.encrypt.Encrypt(data, password);
+            LibCriptoGOST.GostApi ApiGOST = new();
+                        var enc = ApiGOST.encrypt.Encrypt(data, password);
             Console.WriteLine(enc);
 
-            var dec = ApiGOST.decrypt.Decrypt(enc, password);
+            LibCriptoGOST.GostApi ApiGOST2 = new();
+            var dec = ApiGOST2.decrypt.Decrypt(enc, password);
             Console.WriteLine(dec);
+
+            // Ввод ошибочного пароля
+            var decErr = ApiGOST2.decrypt.Decrypt(enc, "fail");
+            Console.WriteLine(decErr);
 
         }
 
@@ -29,14 +33,17 @@ namespace _Demo
         {
             string data = "Hello AES!!!";
             string password = "pass";
-            LibCriptoAES.API ApiAES = new();
+            LibCriptoAES.AesApi ApiAES = new();
 
             var enc = ApiAES.encrypt.Encrypt(data, password);
             Console.WriteLine(enc);
 
-            var dec = ApiAES.decrypt.Decrypt(enc, password);
+            LibCriptoAES.AesApi ApiAES2 = new();
+            var dec = ApiAES2.decrypt.Decrypt(enc, password);
             Console.WriteLine(dec);
 
+            var decErr = ApiAES2.decrypt.Decrypt(enc, "fail");
+            Console.WriteLine(decErr);
         }
     }
 }

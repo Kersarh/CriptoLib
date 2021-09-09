@@ -12,16 +12,9 @@ namespace LibCriptoAES
 {
     class EncryptData:IEncryption
     {
-        public IKey keyService;
-
-        public EncryptData(IKey key)
-        {
-            keyService = key;
-        }
-
         public string Encrypt(string message, string pass)
         {
-            (byte[], byte[]) vkey = keyService.CreatePassword(pass);
+            (byte[], byte[]) vkey = KeyData.CreatePassword(pass);
             byte[] salt = vkey.Item1;
             byte[] key = vkey.Item2;
 

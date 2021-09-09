@@ -8,16 +8,9 @@ using System.Threading.Tasks;
 
 namespace LibCriptoAES
 {
-    class KeyData:IKey
+    static class KeyData
     {
-
-        public byte[] CreateKey()
-        {
-            using Aes myAes = Aes.Create();
-            return myAes.Key;
-        }
-
-        public (byte[], byte[]) CreatePassword(string password)
+        public static (byte[], byte[]) CreatePassword(string password)
         {
             // Соль
             byte[] salt = new byte[8];
@@ -33,7 +26,7 @@ namespace LibCriptoAES
             return result;
         }
 
-        public byte[] UsePassword(string password, byte[] salt)
+        public static byte[] UsePassword(string password, byte[] salt)
         {
             Rfc2898DeriveBytes k1 = new(password, salt, 10000);
             byte[] pass = k1.GetBytes(16);
