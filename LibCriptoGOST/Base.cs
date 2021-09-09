@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibCriptoGOST
 {
-    class Base
+    internal class Base
     {
         protected byte[][] SubstitutionBox =
         {
@@ -37,7 +32,6 @@ namespace LibCriptoGOST
 
         public byte[] EncodeBlock(byte[] block, uint[] keys)
         {
-            // separate on 2 blocks.
             uint N1 = BitConverter.ToUInt32(block, 0);
             uint N2 = BitConverter.ToUInt32(block, 4);
 
@@ -45,9 +39,9 @@ namespace LibCriptoGOST
             {
                 int keyIndex = i < 24 ? (i % 8) : (7 - i % 8);
                 uint s = (N1 + keys[keyIndex]) % uint.MaxValue;
-                s = Substitution(s); // substitute from box
+                s = Substitution(s);
                 s = (s << 11) | (s >> 21);
-                s ^= N2; 
+                s ^= N2;
 
                 if (i < 31)
                 {
@@ -74,13 +68,12 @@ namespace LibCriptoGOST
 
         public byte[] DecodeBlock(byte[] block, uint[] keys)
         {
-
             uint N1 = BitConverter.ToUInt32(block, 0);
             uint N2 = BitConverter.ToUInt32(block, 4);
 
             for (int i = 0; i < 32; i++)
             {
-                int keyIndex = i < 8 ? (i % 8) : (7 - i % 8);
+                int keyIndex = (i < 8) ? (i % 8) : (7 - i % 8);
                 uint s = (N1 + keys[keyIndex]) % uint.MaxValue;
                 s = Substitution(s);
                 s = (s << 11) | (s >> 21);
@@ -108,6 +101,5 @@ namespace LibCriptoGOST
 
             return output;
         }
-
     }
 }

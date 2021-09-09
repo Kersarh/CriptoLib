@@ -1,11 +1,9 @@
 ﻿using LibCriptoGOST.Interface;
-using System;
 
 namespace LibCriptoGOST
 {
     public class GostApi
     {
-
         public IEncryption encrypt;
         public IDecryption decrypt;
 

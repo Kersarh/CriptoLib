@@ -1,14 +1,13 @@
 ﻿using LibCriptoGOST.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LibCriptoGOST
 {
-    class DecryptData:Base, IDecryption
+    internal class DecryptData : Base, IDecryption
     {
         public string Decrypt(string encmsg, string pass, bool isParallel = false)
         {
@@ -43,7 +42,5 @@ namespace LibCriptoGOST
             string result = Encoding.UTF8.GetString(decriptMsg);
             return result;
         }
-
-       
     }
 }

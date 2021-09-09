@@ -2,9 +2,9 @@
 
 namespace _Demo
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             TestAES();
             TestGOST();
@@ -15,35 +15,38 @@ namespace _Demo
             string data = "Hello GOST!!!";
             string password = "pass";
 
+            Console.WriteLine("\n----- GOST -----\n");
+
             LibCriptoGOST.GostApi ApiGOST = new();
-                        var enc = ApiGOST.encrypt.Encrypt(data, password);
-            Console.WriteLine(enc);
+            var enc = ApiGOST.encrypt.Encrypt(data, password);
+            Console.WriteLine($"Encrypt: \n{enc}\n");
 
             LibCriptoGOST.GostApi ApiGOST2 = new();
             var dec = ApiGOST2.decrypt.Decrypt(enc, password);
-            Console.WriteLine(dec);
+            Console.WriteLine($"Decrypt: \n{dec}\n");
 
             // Ввод ошибочного пароля
             var decErr = ApiGOST2.decrypt.Decrypt(enc, "fail");
-            Console.WriteLine(decErr);
-
+            Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
         }
 
-        static void TestAES()
+        private static void TestAES()
         {
             string data = "Hello AES!!!";
             string password = "pass";
-            LibCriptoAES.AesApi ApiAES = new();
 
+            Console.WriteLine("\n----- AES -----\n");
+
+            LibCriptoAES.AesApi ApiAES = new();
             var enc = ApiAES.encrypt.Encrypt(data, password);
-            Console.WriteLine(enc);
+            Console.WriteLine($"Encrypt: \n{enc}\n");
 
             LibCriptoAES.AesApi ApiAES2 = new();
             var dec = ApiAES2.decrypt.Decrypt(enc, password);
-            Console.WriteLine(dec);
+            Console.WriteLine($"Decrypt: \n{dec}\n");
 
             var decErr = ApiAES2.decrypt.Decrypt(enc, "fail");
-            Console.WriteLine(decErr);
+            Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
         }
     }
 }

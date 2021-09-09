@@ -2,15 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace LibCriptoAES
 {
-    class DecryptData:IDecryption
+    internal class DecryptData : IDecryption
     {
         public string Decrypt(string encmsg, string pass)
         {
@@ -42,7 +40,6 @@ namespace LibCriptoAES
                     // WARNING!!!! В случае ошибки (неверный пароль)!
                     plaintext = "Error! Invalid password";
                 }
-
             }
             return plaintext;
         }

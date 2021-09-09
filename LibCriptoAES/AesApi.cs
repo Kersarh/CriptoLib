@@ -1,5 +1,4 @@
 ﻿using LibCriptoAES.Interface;
-using System;
 
 namespace LibCriptoAES
 {

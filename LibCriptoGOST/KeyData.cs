@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibCriptoGOST
 {
-    static class KeyData
+    internal static class KeyData
     {
         public static (byte[] salt, byte[] password) CreatePassword(string password)
         {
@@ -32,7 +28,7 @@ namespace LibCriptoGOST
             return pass;
         }
 
-         public static uint[] GenerateKeys(byte[] key)
+        public static uint[] GenerateKeys(byte[] key)
         {
             if (key.Length != 32)
             {

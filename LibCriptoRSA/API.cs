@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LibCriptoRSA
+﻿namespace LibCriptoRSA
 {
     public class API
     {

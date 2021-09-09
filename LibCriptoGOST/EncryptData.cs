@@ -1,14 +1,13 @@
 ﻿using LibCriptoGOST.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LibCriptoGOST
 {
-    class EncryptData:Base, IEncryption
+    internal class EncryptData : Base, IEncryption
     {
         public string Encrypt(string msg, string pass, bool isParallel = false)
         {

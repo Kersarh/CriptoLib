@@ -1,14 +1,8 @@
-﻿using LibCriptoAES.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace LibCriptoAES
 {
-    static class KeyData
+    internal static class KeyData
     {
         public static (byte[], byte[]) CreatePassword(string password)
         {
@@ -33,6 +27,5 @@ namespace LibCriptoAES
 
             return pass;
         }
-
     }
 }
