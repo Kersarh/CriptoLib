@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibCriptoGOST", "LibCriptoG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibCriptoRSA", "LibCriptoRSA\LibCriptoRSA.csproj", "{A57BA380-E744-472E-B77A-05872D18024A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibCriptoRC4", "LibCriptoRC4\LibCriptoRC4.csproj", "{CDB21645-2EE5-4D0D-B787-58197DF6270B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A57BA380-E744-472E-B77A-05872D18024A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A57BA380-E744-472E-B77A-05872D18024A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A57BA380-E744-472E-B77A-05872D18024A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB21645-2EE5-4D0D-B787-58197DF6270B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB21645-2EE5-4D0D-B787-58197DF6270B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB21645-2EE5-4D0D-B787-58197DF6270B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB21645-2EE5-4D0D-B787-58197DF6270B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
