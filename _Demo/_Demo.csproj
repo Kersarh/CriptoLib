@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LibCriptoAES\LibCriptoAES.csproj" />
     <ProjectReference Include="..\LibCriptoGOST\LibCriptoGOST.csproj" />
+    <ProjectReference Include="..\LibCriptoRC4\LibCriptoRC4.csproj" />
     <ProjectReference Include="..\LibCriptoRSA\LibCriptoRSA.csproj" />
   </ItemGroup>
 

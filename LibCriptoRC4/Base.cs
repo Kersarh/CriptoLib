@@ -1,32 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LibCriptoRC4
 {
     public class Base
     {
-        public byte[] Password { get; set; }
-
-        public Base(string password)
-        {
-            byte[] passwordByte = Encoding.UTF8.GetBytes(password);
-            Password = passwordByte;
-        }
-
         /// <summary>
         /// Encrypt String
         /// </summary>
         /// <param name="password"></param>
         /// <param name="data"></param>
         /// <returns>string</returns>
-        public string Encrypt(string data)
+        public string Encrypt(string data, string password)
         {
             byte[] dataByte = Encoding.UTF8.GetBytes(data);
+            byte[] passwordByte = Encoding.UTF8.GetBytes(password);
 
-            byte[] res = Encrypt(dataByte);
+            byte[] res = Encrypt(dataByte, passwordByte);
             return Convert.ToBase64String(res);
         }
 
@@ -36,7 +26,7 @@ namespace LibCriptoRC4
         /// <param name="Password"></param>
         /// <param name="data"></param>
         /// <returns>byte[]</returns>
-        public byte[] Encrypt(byte[] data)
+        public byte[] Encrypt(byte[] data, byte[] password)
         {
             int a, i, j, k, tmp;
             int[] key, box;
@@ -48,7 +38,7 @@ namespace LibCriptoRC4
 
             for (i = 0; i < 256; i++)
             {
-                key[i] = Password[i % Password.Length];
+                key[i] = password[i % password.Length];
                 box[i] = i;
             }
             for (j = i = 0; i < 256; i++)
@@ -79,11 +69,12 @@ namespace LibCriptoRC4
         /// <param name="password"></param>
         /// <param name="data"></param>
         /// <returns>string</returns>
-        public string Decrypt(string data)
+        public string Decrypt(string data, string password)
         {
             byte[] dataByte = Convert.FromBase64String(data);
+            byte[] passwordByte = Encoding.UTF8.GetBytes(password);
 
-            byte[] result = Encrypt(dataByte);
+            byte[] result = Encrypt(dataByte, passwordByte);
             return Encoding.UTF8.GetString(result);
         }
 
@@ -93,10 +84,9 @@ namespace LibCriptoRC4
         /// <param name="password"></param>
         /// <param name="data"></param>
         /// <returns>byte[]</returns>
-        public byte[] Decrypt(byte[] data)
+        public byte[] Decrypt(byte[] data, byte[] password)
         {
-            return Encrypt(data);
+            return Encrypt(data, password);
         }
-
     }
 }

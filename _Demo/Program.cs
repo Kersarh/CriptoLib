@@ -8,6 +8,7 @@ namespace _Demo
         {
             TestAES();
             TestGOST();
+            TestRC4();
         }
 
         private static void TestGOST()
@@ -46,6 +47,25 @@ namespace _Demo
             Console.WriteLine($"Decrypt: \n{dec}\n");
 
             var decErr = ApiAES2.decrypt.Decrypt(enc, "fail");
+            Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
+        }
+
+        static void TestRC4()
+        {
+            string data = "Hello RC4!!!";
+            string password = "pass";
+
+            Console.WriteLine("\n----- RC4 -----\n");
+
+            LibCriptoRC4.Base rc4 = new();
+            string enc = rc4.Encrypt(data, password); 
+            Console.WriteLine($"Encrypt: \n{enc}\n");
+
+            LibCriptoRC4.Base rc4_2 = new();
+            var dec = rc4_2.Decrypt(enc, password);
+            Console.WriteLine($"Decrypt: \n{dec}\n");
+
+            var decErr = rc4_2.Decrypt(enc, "fail");
             Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
         }
     }
