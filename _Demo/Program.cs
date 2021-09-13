@@ -9,6 +9,49 @@ namespace _Demo
             TestAES();
             TestGOST();
             TestRC4();
+            TestRSA();
+        }
+
+        private static void TestRSA()
+        {
+            Console.WriteLine("\n----- RSA -----\n");
+
+            string msg = "My Test Message for RSA";
+            Console.WriteLine($"Оригинальное сообщение: {msg}");
+
+            // Создаем Экземпляр класса
+            LibCriptoRSA.RsaApi criptAlise = new(); // Экземпляр для Алисы
+            LibCriptoRSA.RsaApi criptBob = new(); // Экземпляр для Боба
+            
+            // Пример перехвата уведомлений
+            criptAlise.keyService.KeyRewrite += Key_KeyRewrite;
+            criptAlise.signatureService.SigNotify += Signature_SigNotify;
+
+            // Создадим пары ключей для Алисы и Боба
+            (byte[] aliseKeyPrivate, byte[] aliseKeyPublic) = criptAlise.keyService.CreateKey();
+            (byte[] bobKeyPrivate, byte[] bobKeyPublic) = criptBob.keyService.CreateKey();
+
+            // Экспорт ключа
+            string a = criptAlise.keyService.ExportPrivateKey(aliseKeyPrivate);
+            // Console.WriteLine(a); // Отобразить ключ в консоли
+
+            //Алиса шифрует сообщение для Боба
+            string encmsg = criptAlise.encryptService.Encript(aliseKeyPrivate, bobKeyPublic, msg);
+
+            // Боб расшифровывает сообщение Алисы
+            (string, bool) mes = criptBob.decryptService.Decript(bobKeyPrivate, aliseKeyPublic, encmsg);
+            Console.WriteLine(mes);
+        }
+
+        private static bool Signature_SigNotify(bool b)
+        {
+            Console.WriteLine($"Подпись: {b}");
+            return b;
+        }
+
+        private static bool Key_KeyRewrite(string path)
+        {
+            return true;
         }
 
         private static void TestGOST()
@@ -50,7 +93,7 @@ namespace _Demo
             Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
         }
 
-        static void TestRC4()
+        private static void TestRC4()
         {
             string data = "Hello RC4!!!";
             string password = "pass";
@@ -58,7 +101,7 @@ namespace _Demo
             Console.WriteLine("\n----- RC4 -----\n");
 
             LibCriptoRC4.Base rc4 = new();
-            string enc = rc4.Encrypt(data, password); 
+            string enc = rc4.Encrypt(data, password);
             Console.WriteLine($"Encrypt: \n{enc}\n");
 
             LibCriptoRC4.Base rc4_2 = new();
