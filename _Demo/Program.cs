@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace _Demo
 {
@@ -9,8 +10,11 @@ namespace _Demo
             TestAES();
             TestGOST();
             TestRC4();
+            TestRC6();
             TestRSA();
         }
+
+
 
         private static void TestRSA()
         {
@@ -110,6 +114,27 @@ namespace _Demo
 
             var decErr = rc4_2.Decrypt(enc, "fail");
             Console.WriteLine($"Decrypt invalid password: \n{decErr}\n");
+        }
+
+        private static void TestRC6()
+        {
+            string data = "Hello RC6!!!";
+            string password = "pass";
+
+            Console.WriteLine("\n----- RC6 -----\n");
+
+            LibCriptoRC6.RC6 encRC6 = new(128, password);
+            var enc = encRC6.Encrypt(data);
+            Console.WriteLine($"Encrypt: \n{Encoding.UTF8.GetString(enc)}\n");
+
+            // Декодирование
+            LibCriptoRC6.RC6 decRC6 = new(128, password);
+            var dec = decRC6.Decrypt(enc);
+            Console.WriteLine($"Decrypt: \n{Encoding.UTF8.GetString(dec)}\n");
+
+            LibCriptoRC6.RC6 decRC6Err = new(128, "fail");
+            var decErr = decRC6Err.Decrypt(enc);
+            Console.WriteLine($"Decrypt invalid password: \n{Encoding.UTF8.GetString(decErr)}\n");
         }
     }
 }
